@@ -1,0 +1,166 @@
+#+HTML_DOCTYPE: html5
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style.css" ></link>
+#+TITLE: what I did (with docker) in my holidays
+#+OPTIONS: num:0
+
+* [[file:poool.jpg]]
+
+* I make lots of stuff, often small stuff [[file:screenshot.jpg]]
+** nics blog
+** marmalade-repo
+** pgdevbox
+** gnudoc
+** linky
+
+* the problem [[file:kitchener.jpeg]]
+** deploying brand new things is hard
+** maintaining the deployments is harder
+
+* docker is a packaging system [[file:article-0-0BB6176300000578-1_468x538.jpg]]
+
+* it is just a packaging system [[file:fans.jpg]]
+
+* how it works - containers
+** [[file:rob.pike.jpg]]
+** everything's namespaces
+** why don't we make sockets like this?
+#+BEGIN_SRC 
+$ echo query=rob+pike > /network/http/www.google.com
+#+END_SRC
+** 1987
+#+BEGIN_SRC 
+$ chroot --userspec=nobadguyz /opt/bind9jail /usr/local/bin/named
+#+END_SRC
+** docker
+#+BEGIN_SRC 
+$ docker run -i -t ubuntu:14.04 /bin/bash
+#+END_SRC
+
+* aufs - layers of file systems
+** [[file:ht-funphotos1515.jpg]]
+
+* a first example of a Dockerfile [[file:matrix.jpeg]]
+#+BEGIN_SRC 
+FROM nicferrier/elnode-and-nodejs
+MAINTAINER nic@ferrier.me.uk
+USER emacs
+WORKDIR /home/emacs
+RUN git clone https://github.com/nicferrier/gnudoc-js.git
+WORKDIR /home/emacs/gnudoc-js
+RUN npm install .
+CMD /usr/local/emacs/bin/emacs -daemon -l gnudoc.el ; tail -f /dev/null
+#+END_SRC
+
+* start with a layer - [[file:docker-aufs-sketch-1.jpg]]
+* then it's layers ...  [[file:docker-aufs-sketch-2.jpg]]
+* ... upon layers ...  [[file:docker-aufs-sketch-3.jpg]]
+* ... on more layers ...  [[file:docker-aufs-sketch-4.jpg]]
+
+* deploying
+** [[file:eniac4.gif]]
+
+* [[file:docker-pull-sketch.jpg]]
+
+* lol. not really [[file:launching1-16-wiki-19042.jpg]]
+#+BEGIN_SRC 
+mylaptop$ docker push mything
+.
+.
+.
+myremotehost$ docker pull mything
+.
+.
+.
+myremotehost$ docker run -d mything
+22406d84f32017453392d6295f66c94efea41dd37c25d744943a22b2ed1c6193
+#+END_SRC
+
+* it's easier than in C++
+** [[file:Plumbing1.jpg]]
+** link by tcp port - meh
+** link by volume - unix sockets work
+#+BEGIN_SRC 
+FROM nicferrier/emacs
+MAINTAINER nic@ferrier.me.uk
+VOLUME /home/emacs/.emacs.d
+PORT 8006
+#+END_SRC
+
+* orchestration - you need one of these
+** [[file:conductor-simon-rattle.jpg]]
+
+* and it turns out like this
+** [[file:the-battle-of-blenheim-on-the-13th-august-1704-c-1743-2-by-john-wootton.jpg]]
+
+* more complicated docker example [[file:big-ship-launch.jpg]]
+#+BEGIN_SRC 
+# A Docker file to marmalade in a docker
+FROM nicferrier/elnode
+MAINTAINER nic@ferrier.me.uk
+USER root
+ADD Dockerfile-marmalade-deploy.el /tmp/Dockerfile-marmalade-deploy.el
+ADD builds/ /home/emacs/builds
+ADD boot.el /home/emacs/boot.el
+RUN chown -R emacs /home/emacs/builds
+RUN chown emacs /tmp/Dockerfile-marmalade-deploy.el
+RUN chown emacs /home/emacs/boot.el
+USER emacs
+WORKDIR /home/emacs
+ENV HOME /home/emacs
+RUN mkdir /home/emacs/marmalade
+VOLUME /home/emacs/marmalade/
+RUN /usr/local/emacs/bin/emacs -daemon -l /tmp/Dockerfile-marmalade-deploy.el
+EXPOSE 8005
+CMD /usr/local/emacs/bin/emacs -daemon -l  /home/emacs/boot.el ; tail -f /dev/null
+#+END_SRC
+
+* the make for that [[file:big-ship-launch.jpg]]
+#+BEGIN_SRC Makefile
+marmalade: build
+	$(docker) push nicferrier/elmarmalade
+
+build: test
+	$(emacs) -batch --eval '(progn(package-initialize)(elpakit-make-multi "." "builds"))'
+	$(docker) build --no-cache -t nicferrier/elmarmalade .
+
+test:
+	[ -x $(emacs) ] # missing emacs?
+	$(docker) help 2> /dev/null # missing docker?
+
+# End
+#+END_SRC
+
+
+* it's ok to make a mess [[file:mess.jpg]]
+
+* push or pull
+** [[file:harrison-dolittle-puhsme.jpg]]
+
+* push? [[file:nginx.jpeg]]
+** push aufs images to a docker registry
+
+* push? [[file:1and1serverroom.jpg]]
+** you deploy to a known host
+
+* pull? [[file:Harry4aa.jpg]]
+** make some hosts
+** have them pull
+
+* tooling [[file:heathrob.jpg]]
+** shell scripts
+#+BEGIN_SRC shell-script
+docker inspect container | jq
+#+END_SRC
+** or go back to the deploy host
+
+* free lunch! [[file:free-lunch.jpg]]
+
+
+* microservices [[file:fans.jpg]]
+
+* personal computing [[file:yoga.jpeg]]
+** docker is immature
+
+* fin [[file:virtuvius.jpg]]
+
+#+HTML: <script src="app.js"></script>

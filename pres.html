@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>what I did (with docker) in my holidays</title>
+<!-- 2014-09-11 Thu 08:32 -->
+<meta  charset="utf-8">
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="Nic Ferrier">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="style.css" ></link>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">what I did (with docker) in my holidays</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1"></a></li>
+<li><a href="#sec-2">I make lots of stuff, often small stuff </a>
+<ul>
+<li><a href="#sec-2-1">nics blog</a></li>
+<li><a href="#sec-2-2">marmalade-repo</a></li>
+<li><a href="#sec-2-3">pgdevbox</a></li>
+<li><a href="#sec-2-4">gnudoc</a></li>
+<li><a href="#sec-2-5">linky</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">the problem </a>
+<ul>
+<li><a href="#sec-3-1">deploying brand new things is hard</a></li>
+<li><a href="#sec-3-2">maintaining the deployments is harder</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">docker is a packaging system </a></li>
+<li><a href="#sec-5">it is just a packaging system </a></li>
+<li><a href="#sec-6">how it works - containers</a>
+<ul>
+<li><a href="#sec-6-1"></a></li>
+<li><a href="#sec-6-2">everything's namespaces</a></li>
+<li><a href="#sec-6-3">why don't we make sockets like this?</a></li>
+<li><a href="#sec-6-4">1987</a></li>
+<li><a href="#sec-6-5">docker</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">aufs - layers of file systems</a>
+<ul>
+<li><a href="#sec-7-1"></a></li>
+</ul>
+</li>
+<li><a href="#sec-8">a first example of a Dockerfile </a></li>
+<li><a href="#sec-9">start with a layer - </a></li>
+<li><a href="#sec-10">then it's layers &#x2026;  </a></li>
+<li><a href="#sec-11">&#x2026; upon layers &#x2026;  </a></li>
+<li><a href="#sec-12">&#x2026; on more layers &#x2026;  </a></li>
+<li><a href="#sec-13">deploying</a>
+<ul>
+<li><a href="#sec-13-1"></a></li>
+</ul>
+</li>
+<li><a href="#sec-14"></a></li>
+<li><a href="#sec-15">lol. not really </a></li>
+<li><a href="#sec-16">it's easier than in C++</a>
+<ul>
+<li><a href="#sec-16-1"></a></li>
+<li><a href="#sec-16-2">link by tcp port - meh</a></li>
+<li><a href="#sec-16-3">link by volume - unix sockets work</a></li>
+</ul>
+</li>
+<li><a href="#sec-17">orchestration - you need one of these</a>
+<ul>
+<li><a href="#sec-17-1"></a></li>
+</ul>
+</li>
+<li><a href="#sec-18">and it turns out like this</a>
+<ul>
+<li><a href="#sec-18-1"></a></li>
+</ul>
+</li>
+<li><a href="#sec-19">more complicated docker example </a></li>
+<li><a href="#sec-20">the make for that </a></li>
+<li><a href="#sec-21">it's ok to make a mess </a></li>
+<li><a href="#sec-22">push or pull</a>
+<ul>
+<li><a href="#sec-22-1"></a></li>
+</ul>
+</li>
+<li><a href="#sec-23">push? </a>
+<ul>
+<li><a href="#sec-23-1">push aufs images to a docker registry</a></li>
+</ul>
+</li>
+<li><a href="#sec-24">push? </a>
+<ul>
+<li><a href="#sec-24-1">you deploy to a known host</a></li>
+</ul>
+</li>
+<li><a href="#sec-25">pull? </a>
+<ul>
+<li><a href="#sec-25-1">make some hosts</a></li>
+<li><a href="#sec-25-2">have them pull</a></li>
+</ul>
+</li>
+<li><a href="#sec-26">tooling </a>
+<ul>
+<li><a href="#sec-26-1">shell scripts</a></li>
+<li><a href="#sec-26-2">or go back to the deploy host</a></li>
+</ul>
+</li>
+<li><a href="#sec-27">free lunch! </a></li>
+<li><a href="#sec-28">microservices </a></li>
+<li><a href="#sec-29">personal computing </a>
+<ul>
+<li><a href="#sec-29-1">docker is immature</a></li>
+</ul>
+</li>
+<li><a href="#sec-30">fin </a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><img src="poool.jpg" alt="poool.jpg"></h2>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">I make lots of stuff, often small stuff <img src="screenshot.jpg" alt="screenshot.jpg"></h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1">nics blog</h3>
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2">marmalade-repo</h3>
+</div>
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3">pgdevbox</h3>
+</div>
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4">gnudoc</h3>
+</div>
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5">linky</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">the problem <img src="kitchener.jpeg" alt="kitchener.jpeg"></h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1">deploying brand new things is hard</h3>
+</div>
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2">maintaining the deployments is harder</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">docker is a packaging system <img src="article-0-0BB6176300000578-1_468x538.jpg" alt="article-0-0BB6176300000578-1_468x538.jpg"></h2>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">it is just a packaging system <img src="fans.jpg" alt="fans.jpg"></h2>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">how it works - containers</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><img src="rob.pike.jpg" alt="rob.pike.jpg"></h3>
+</div>
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2">everything's namespaces</h3>
+</div>
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3">why don't we make sockets like this?</h3>
+<div class="outline-text-3" id="text-6-3">
+<pre class="example">
+$ echo query=rob+pike &gt; /network/http/www.google.com
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-6-4" class="outline-3">
+<h3 id="sec-6-4">1987</h3>
+<div class="outline-text-3" id="text-6-4">
+<pre class="example">
+$ chroot --userspec=nobadguyz /opt/bind9jail /usr/local/bin/named
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-6-5" class="outline-3">
+<h3 id="sec-6-5">docker</h3>
+<div class="outline-text-3" id="text-6-5">
+<pre class="example">
+$ docker run -i -t ubuntu:14.04 /bin/bash
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">aufs - layers of file systems</h2>
+<div class="outline-text-2" id="text-7">
+</div><div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><img src="ht-funphotos1515.jpg" alt="ht-funphotos1515.jpg"></h3>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">a first example of a Dockerfile <img src="matrix.jpeg" alt="matrix.jpeg"></h2>
+<div class="outline-text-2" id="text-8">
+<pre class="example">
+FROM nicferrier/elnode-and-nodejs
+MAINTAINER nic@ferrier.me.uk
+USER emacs
+WORKDIR /home/emacs
+RUN git clone https://github.com/nicferrier/gnudoc-js.git
+WORKDIR /home/emacs/gnudoc-js
+RUN npm install .
+CMD /usr/local/emacs/bin/emacs -daemon -l gnudoc.el ; tail -f /dev/null
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9">start with a layer - <img src="docker-aufs-sketch-1.jpg" alt="docker-aufs-sketch-1.jpg"></h2>
+</div>
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10">then it's layers &#x2026;  <img src="docker-aufs-sketch-2.jpg" alt="docker-aufs-sketch-2.jpg"></h2>
+</div>
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11">&#x2026; upon layers &#x2026;  <img src="docker-aufs-sketch-3.jpg" alt="docker-aufs-sketch-3.jpg"></h2>
+</div>
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12">&#x2026; on more layers &#x2026;  <img src="docker-aufs-sketch-4.jpg" alt="docker-aufs-sketch-4.jpg"></h2>
+</div>
+
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13">deploying</h2>
+<div class="outline-text-2" id="text-13">
+</div><div id="outline-container-sec-13-1" class="outline-3">
+<h3 id="sec-13-1"><img src="eniac4.gif" alt="eniac4.gif"></h3>
+</div>
+</div>
+
+<div id="outline-container-sec-14" class="outline-2">
+<h2 id="sec-14"><img src="docker-pull-sketch.jpg" alt="docker-pull-sketch.jpg"></h2>
+</div>
+
+<div id="outline-container-sec-15" class="outline-2">
+<h2 id="sec-15">lol. not really <img src="launching1-16-wiki-19042.jpg" alt="launching1-16-wiki-19042.jpg"></h2>
+<div class="outline-text-2" id="text-15">
+<pre class="example">
+mylaptop$ docker push mything
+.
+.
+.
+myremotehost$ docker pull mything
+.
+.
+.
+myremotehost$ docker run -d mything
+22406d84f32017453392d6295f66c94efea41dd37c25d744943a22b2ed1c6193
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-16" class="outline-2">
+<h2 id="sec-16">it's easier than in C++</h2>
+<div class="outline-text-2" id="text-16">
+</div><div id="outline-container-sec-16-1" class="outline-3">
+<h3 id="sec-16-1"><img src="Plumbing1.jpg" alt="Plumbing1.jpg"></h3>
+</div>
+<div id="outline-container-sec-16-2" class="outline-3">
+<h3 id="sec-16-2">link by tcp port - meh</h3>
+</div>
+<div id="outline-container-sec-16-3" class="outline-3">
+<h3 id="sec-16-3">link by volume - unix sockets work</h3>
+<div class="outline-text-3" id="text-16-3">
+<pre class="example">
+FROM nicferrier/emacs
+MAINTAINER nic@ferrier.me.uk
+VOLUME /home/emacs/.emacs.d
+PORT 8006
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-17" class="outline-2">
+<h2 id="sec-17">orchestration - you need one of these</h2>
+<div class="outline-text-2" id="text-17">
+</div><div id="outline-container-sec-17-1" class="outline-3">
+<h3 id="sec-17-1"><img src="conductor-simon-rattle.jpg" alt="conductor-simon-rattle.jpg"></h3>
+</div>
+</div>
+
+<div id="outline-container-sec-18" class="outline-2">
+<h2 id="sec-18">and it turns out like this</h2>
+<div class="outline-text-2" id="text-18">
+</div><div id="outline-container-sec-18-1" class="outline-3">
+<h3 id="sec-18-1"><img src="the-battle-of-blenheim-on-the-13th-august-1704-c-1743-2-by-john-wootton.jpg" alt="the-battle-of-blenheim-on-the-13th-august-1704-c-1743-2-by-john-wootton.jpg"></h3>
+</div>
+</div>
+
+<div id="outline-container-sec-19" class="outline-2">
+<h2 id="sec-19">more complicated docker example <img src="big-ship-launch.jpg" alt="big-ship-launch.jpg"></h2>
+<div class="outline-text-2" id="text-19">
+<pre class="example">
+# A Docker file to marmalade in a docker
+FROM nicferrier/elnode
+MAINTAINER nic@ferrier.me.uk
+USER root
+ADD Dockerfile-marmalade-deploy.el /tmp/Dockerfile-marmalade-deploy.el
+ADD builds/ /home/emacs/builds
+ADD boot.el /home/emacs/boot.el
+RUN chown -R emacs /home/emacs/builds
+RUN chown emacs /tmp/Dockerfile-marmalade-deploy.el
+RUN chown emacs /home/emacs/boot.el
+USER emacs
+WORKDIR /home/emacs
+ENV HOME /home/emacs
+RUN mkdir /home/emacs/marmalade
+VOLUME /home/emacs/marmalade/
+RUN /usr/local/emacs/bin/emacs -daemon -l /tmp/Dockerfile-marmalade-deploy.el
+EXPOSE 8005
+CMD /usr/local/emacs/bin/emacs -daemon -l  /home/emacs/boot.el ; tail -f /dev/null
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-20" class="outline-2">
+<h2 id="sec-20">the make for that <img src="big-ship-launch.jpg" alt="big-ship-launch.jpg"></h2>
+<div class="outline-text-2" id="text-20">
+<div class="org-src-container">
+
+<pre class="src src-Makefile">marmalade: build
+        $(docker) push nicferrier/elmarmalade
+
+build: test
+        $(emacs) -batch --eval '(progn(package-initialize)(elpakit-make-multi "." "builds"))'
+        $(docker) build --no-cache -t nicferrier/elmarmalade .
+
+test:
+        [ -x $(emacs) ] # missing emacs?
+        $(docker) help 2&gt; /dev/null # missing docker?
+
+# End
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-21" class="outline-2">
+<h2 id="sec-21">it's ok to make a mess <img src="mess.jpg" alt="mess.jpg"></h2>
+</div>
+
+<div id="outline-container-sec-22" class="outline-2">
+<h2 id="sec-22">push or pull</h2>
+<div class="outline-text-2" id="text-22">
+</div><div id="outline-container-sec-22-1" class="outline-3">
+<h3 id="sec-22-1"><img src="harrison-dolittle-puhsme.jpg" alt="harrison-dolittle-puhsme.jpg"></h3>
+</div>
+</div>
+
+<div id="outline-container-sec-23" class="outline-2">
+<h2 id="sec-23">push? <img src="nginx.jpeg" alt="nginx.jpeg"></h2>
+<div class="outline-text-2" id="text-23">
+</div><div id="outline-container-sec-23-1" class="outline-3">
+<h3 id="sec-23-1">push aufs images to a docker registry</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-24" class="outline-2">
+<h2 id="sec-24">push? <img src="1and1serverroom.jpg" alt="1and1serverroom.jpg"></h2>
+<div class="outline-text-2" id="text-24">
+</div><div id="outline-container-sec-24-1" class="outline-3">
+<h3 id="sec-24-1">you deploy to a known host</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-25" class="outline-2">
+<h2 id="sec-25">pull? <img src="Harry4aa.jpg" alt="Harry4aa.jpg"></h2>
+<div class="outline-text-2" id="text-25">
+</div><div id="outline-container-sec-25-1" class="outline-3">
+<h3 id="sec-25-1">make some hosts</h3>
+</div>
+<div id="outline-container-sec-25-2" class="outline-3">
+<h3 id="sec-25-2">have them pull</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-26" class="outline-2">
+<h2 id="sec-26">tooling <img src="heathrob.jpg" alt="heathrob.jpg"></h2>
+<div class="outline-text-2" id="text-26">
+</div><div id="outline-container-sec-26-1" class="outline-3">
+<h3 id="sec-26-1">shell scripts</h3>
+<div class="outline-text-3" id="text-26-1">
+<div class="org-src-container">
+
+<pre class="src src-shell-script">docker inspect container | jq
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-26-2" class="outline-3">
+<h3 id="sec-26-2">or go back to the deploy host</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-27" class="outline-2">
+<h2 id="sec-27">free lunch! <img src="free-lunch.jpg" alt="free-lunch.jpg"></h2>
+</div>
+
+
+<div id="outline-container-sec-28" class="outline-2">
+<h2 id="sec-28">microservices <img src="fans.jpg" alt="fans.jpg"></h2>
+</div>
+
+<div id="outline-container-sec-29" class="outline-2">
+<h2 id="sec-29">personal computing <img src="yoga.jpeg" alt="yoga.jpeg"></h2>
+<div class="outline-text-2" id="text-29">
+</div><div id="outline-container-sec-29-1" class="outline-3">
+<h3 id="sec-29-1">docker is immature</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-30" class="outline-2">
+<h2 id="sec-30">fin <img src="virtuvius.jpg" alt="virtuvius.jpg"></h2>
+<div class="outline-text-2" id="text-30">
+<script src="app.js"></script>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Nic Ferrier</p>
+<p class="date">Created: 2014-09-11 Thu 08:32</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

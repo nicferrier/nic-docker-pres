@@ -1,0 +1,101 @@
+#table-of-contents {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+body {
+    font-family: sans-serif;
+    height: 100%;
+    max-width: 100%;
+}
+
+#postamble {
+    display: none;
+}
+
+#content {
+    min-height: 100%;
+}
+
+#content:after {
+    display: block;
+    height: 10em;
+}
+
+.outline-2 {
+    display: none;
+    min-height: 100%;
+}
+
+.displayed {
+    display: block !important;
+}
+
+.outline-3 {
+    min-height: 100%;
+}
+
+img {
+    display: none;
+    max-height: 100%;
+    max-width: 100%;
+    height: 80%;
+    width: 100%;
+}
+
+.title {
+    position: fixed;
+    bottom: 0;
+    right: 100px;
+    color: #cccccc;
+    text-shadow: -2px -2px #000, 2px -2px #000, -2px 2px #000, 2px 2px #000;
+}
+
+#next {
+    cursor: pointer;
+    font-size: 80pt;
+    color: #cccccc;
+    text-shadow: -2px -2px #000, 2px -2px #000, -2px 2px #000, 2px 2px #000;
+    position: fixed;
+    top: 50%;
+    right: 0;
+}
+
+
+h1 {
+    font-size: 40pt;
+}
+
+h2, h3 {
+    color: #dddddd;
+    text-shadow: -2px -2px #000, 2px -2px #000, -2px 2px #000, 2px 2px #000;
+}
+
+h2 {
+    font-size: 48pt;
+}
+
+h3 {
+    font-size: 24pt;
+}
+
+pre {
+    background-color: #111111;
+    color: #11AA55;
+    font-size: 18pt;
+    line-height: 1.5em;
+    opacity: 0.7;
+}
+
+pre.src-coreos-example {
+    font-size: 6pt;
+    background-color: #333333;
+    color: #eeeeee;
+    line-height: 0.9em;
+    column-count: 2;
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+}
